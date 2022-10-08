@@ -84,16 +84,53 @@ class LinkedList:
         self.head = None
         for data in data_list:
             self.insert_at_end(data)
+    
+    def insert_after_value(self, data_after, data_to_insert):
+    # Search for first occurance of data_after value in linked list
+    # Now insert data_to_insert after data_after node
+        indicator = 0
+        itr = self.head
+        while itr:
+            if itr.data == data_after:
+                node = Node(data_to_insert, itr.next)
+                itr.next = node
+                indicator = 1
+                break
+
+            itr = itr.next
+
+        if indicator == 0:
+            raise Exception("No element with value:", data_after)
+    
+    def remove_by_value(self, data):
+    # Remove first node that contains data
+        count = 0
+        itr = self.head
+        while itr:
+            if itr.data == data:
+                self.remove_at(count)
+                break
+            itr = itr.next
+            count += 1
+             
+    
+
 
 
 if __name__ == '__main__':
     ll = LinkedList()
     ll.insert_values(["banana","mango","grapes","orange"])
+    ll.print()
     ll.insert_at(1,"blueberry")
+    ll.print()
     ll.remove_at(2)
     ll.print()
-
-    ll.insert_values([45,7,12,567,99])
-    ll.insert_at_end(67)
+    ll.insert_after_value("grapes","watermelon")
     ll.print()
+    ll.remove_by_value("blueberry")
+    ll.print()
+
+    #ll.insert_values([45,7,12,567,99])
+    #ll.insert_at_end(67)
+    #ll.print()
 
